@@ -66,6 +66,8 @@ Compared with Assignment 3, the previous core features were still kept and impro
 │   ├── ai-usage-report.md
 │   └── technical-documentation.md
 ├── presentation/
+│   ├── Presentation.mp4
+│   ├── Slides.pptx
 │   └── README.md
 └── .gitignore
 ```
@@ -248,7 +250,7 @@ AI was used to support decision-making and documentation, while the final implem
 
 - [docs/technical-documentation.md](docs/technical-documentation.md): explains architecture, features, logic, and implementation choices
 - [docs/ai-usage-report.md](docs/ai-usage-report.md): explains how AI tools were used responsibly
-- [presentation/README.md](presentation/README.md): placeholder notes for slides and demo video deliverables
+- [presentation/README.md](presentation/README.md): contains notes and references to the slides and demo video files in the presentation folder
 
 ## Testing Notes
 
