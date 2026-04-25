@@ -1,325 +1,267 @@
-# Assignment 3 - Advanced Portfolio Web Application
+# 202346910-MohammedAlabdullatif-assignment4
 
 ## Project Description
 
-This project is my Assignment 3 submission for SWE363. It is an upgraded version of my previous portfolio website from the earlier assignment.
+This repository contains my final personal web application for SWE363 Assignment 4.
 
-Instead of deleting the old project and building a completely different website, I reused the original portfolio structure and improved it step by step. This made the project more realistic, because it shows how an existing website can be extended with more advanced functionality instead of always starting from zero.
+The project builds on my earlier portfolio work, but this version is designed as a more polished final submission. It combines professional presentation, responsive front-end design, interactive JavaScript features, live GitHub data, browser-side state management, and detailed documentation into one complete portfolio application.
 
-The final result is a portfolio web application that includes:
-
-- external API integration
-- more advanced JavaScript logic
-- state management using `localStorage`
-- practical front-end performance improvements
-- stronger documentation
-- clear evidence of responsible AI use
-
-## Project Goals
-
-The main goal of this assignment was to turn a basic interactive portfolio into a more advanced and feature-rich web application while still keeping the code simple enough for a student to understand and explain.
-
-I focused on the following:
-
-- keeping the website responsive and easy to use
-- improving the logic in a meaningful way
-- making the portfolio dynamic with real external data
-- writing code that is clean and organized
-- documenting both the technical work and the AI-assisted workflow clearly
+The goal of this assignment was not only to make the site functional, but also to make it feel ready for presentation and future personal use.
 
 ## Main Features
 
-### 1. GitHub API Integration
+- responsive single-page personal portfolio
+- live GitHub API integration
+- project search, filtering, and sorting
+- light and dark theme toggle with saved preference
+- visitor-name personalization using `localStorage`
+- visit counter and time-on-site tracker
+- creative project collaboration planner
+- contact form validation
+- auto-saved contact draft in `localStorage`
+- polished technical documentation and project reporting
 
-The portfolio now connects to the GitHub API and dynamically loads public repositories from my GitHub profile.
+## What Changed from Assignment 3
 
-Displayed information includes:
+This Assignment 4 project is based on my Assignment 3 portfolio, but it was improved to feel more complete, polished, and presentation-ready.
 
-- repository name
-- description
-- main programming language
-- last updated date
-- repository visibility
-- direct link to open the repository
+Main changes made in this version:
 
-This makes the portfolio feel more current because the content can reflect my GitHub activity instead of showing only static text.
+- redesigned the full interface with a more professional visual style
+- reorganized the homepage into a stronger final portfolio structure
+- moved image assets into `assets/images/` to match the required folder layout more closely
+- added a visit counter to show another example of browser-side state
+- added automatic contact draft saving using `localStorage`
+- added a new creative feature called the project collaboration planner
+- improved the hero section so the site presents my work more clearly at first glance
+- expanded the README and technical documentation to match Assignment 4 requirements
+- added a `presentation/` folder for the final slide deck and demo video deliverables
+- updated the project identity from an Assignment 3 upgrade into a final personal web application
 
-### 2. Advanced Project Logic
+Compared with Assignment 3, the previous core features were still kept and improved:
 
-The featured projects section is no longer a static list. It now supports:
+- GitHub API integration is still included
+- project filtering and sorting are still included
+- contact form validation is still included
+- theme persistence and saved visitor name are still included
+- responsive design is still included, but the styling is more polished
 
-- search by text
-- category filtering
-- sorting by multiple rules
+## Folder Structure
 
-Available filters:
+```text
+202346910-MohammedAlabdullatif-assignment4/
+├── README.md
+├── index.html
+├── css/
+│   └── styles.css
+├── js/
+│   └── script.js
+├── assets/
+│   └── images/
+│       ├── Me.jpg
+│       ├── phys.jpg
+│       ├── edad.jpg
+│       └── CalcAward.jpg
+├── docs/
+│   ├── ai-usage-report.md
+│   └── technical-documentation.md
+├── presentation/
+│   └── README.md
+└── .gitignore
+```
 
-- All
-- JavaScript
-- HTML-CSS
-- Other
+## How to Run Locally
 
-Available sorting options:
+This project uses plain HTML, CSS, and JavaScript, so there is no package installation step.
 
-- Recently Updated
-- Oldest Updated
-- Name A-Z
+### Recommended Method
 
-This means a visitor can search for a project, choose a category, and sort the results at the same time.
+1. Clone the repository:
 
-### 3. Contact Form Validation
+```bash
+git clone https://github.com/<your-username>/202346910-MohammedAlabdullatif-assignment4.git
+```
 
-The contact form now performs stronger validation before accepting input.
+2. Move into the project folder:
 
-It checks that:
+```bash
+cd 202346910-MohammedAlabdullatif-assignment4
+```
 
-- the name field is not empty
-- the email field is not empty
-- the email format looks valid
-- the message field is not empty
-- the message contains at least 20 characters
+3. Open the folder in Visual Studio Code.
+4. Run it with a local server such as Live Server.
+5. Open the local URL in your browser.
 
-Validation messages are shown clearly so the user understands what needs to be fixed.
+### Alternative Method
 
-### 4. State Management
+You can also open `index.html` directly in a modern browser, but using a local server is better because it avoids possible browser restrictions and gives more reliable testing behavior.
 
-The website stores small user preferences using `localStorage`.
+## Deployment
 
-Saved features:
+This project is almost ready to be deployed in the next few weeks on:
 
-- light/dark theme preference
-- visitor name preference
+- GitHub Pages
+- Netlify
+- Vercel
 
-When the page reloads, the saved values are restored automatically. This helps demonstrate that the application can remember user state between sessions.
+If I publish it, I can place the live link here later.
 
-### 5. Extra Interactive Features
+## AI Tools Summary
 
-To show more advanced logic, I also added:
+AI was used selectively as a support resource for planning, wording, and small refinements. The final code and feature implementation were completed manually and reviewed by me.
 
-- a time-on-site counter
-- conditional recommendation text based on the visitor's selected experience level
+Main tools used:
 
-These features are simple, but they show that the site can react to user input and update content dynamically.
+- ChatGPT for reviewing the assignment rubric and refining documentation
+- editor-based suggestions for syntax and formatting improvements
 
-### 6. Performance Improvements
+Detailed AI reporting is included in [docs/ai-usage-report.md](docs/ai-usage-report.md).
 
-The site includes practical front-end optimizations:
+## Grading Rubric Alignment
+
+This section explains how the project fulfills the main grading criteria for Assignment 4.
+
+### Technical Implementation
+
+**Functionality (5)**
+
+The website includes all major required features in one working application:
+
+- responsive portfolio structure
+- GitHub API integration
+- project search, filtering, and sorting
+- theme toggle with saved preference
+- visitor-name personalization
+- contact form validation
+- visit counter and time-on-site logic
+- creative planner feature
+- contact draft saving
+
+**Code Quality (5)**
+
+The code is organized into separate files for structure, styling, and logic:
+
+- `index.html`
+- `css/styles.css`
+- `js/script.js`
+- `docs/`
+
+Naming is consistent, formatting is readable, and the logic is divided into clear functions instead of being written as one large block.
+
+**Performance (5)**
+
+Performance was considered in practical ways:
 
 - JavaScript is loaded with `defer`
-- non-critical images use lazy loading
-- repeated DOM rendering is grouped efficiently
-- CSS was reorganized to reduce repetition
-- the project remains lightweight because it uses plain HTML, CSS, and JavaScript only
+- noncritical images use lazy loading
+- the project uses plain HTML, CSS, and JavaScript without unnecessary framework overhead
+- repeated rendering is grouped efficiently
+- the site remains lightweight and fast to load
 
-## Why This Project Matches Assignment 3
+**Compatibility (5)**
 
-This submission addresses the assignment requirements in the following way:
+The layout was designed to work across modern browsers and screen sizes:
 
-- API Integration: GitHub API is used to fetch live repository data
-- Complex Logic: project search, filter, sort, contact validation, timer, and conditional content
-- State Management: theme and visitor name are saved using `localStorage`
-- Performance: `defer`, lazy loading, reusable CSS, and simpler DOM updates
-- Code Quality: organized files, readable naming, and straightforward logic
-- Documentation: includes a detailed README, technical documentation, and AI usage report
-- AI Use: clearly documented in `docs/ai-usage-report.md`
+- desktop
+- tablet
+- mobile
 
-## Rubric Alignment
+The site also includes:
 
-### Functionality
+- keyboard focus styles
+- reduced-motion support
+- fallback logic for scroll-reveal behavior
 
-This website includes all major Assignment 3 features. It integrates the GitHub API, supports project searching, filtering, and sorting, validates the contact form, stores user preferences, and includes extra interactive logic such as the time-on-site counter and conditional visitor recommendations.
+### Documentation
 
-### Code Quality
+**README Quality (10)**
 
-The code is organized into separate HTML, CSS, and JavaScript files. Variable names are descriptive, the logic is split into smaller functions, and the styling is grouped into reusable sections. The goal was to make the project easy to read and easy to explain during evaluation.
+This README includes:
 
-### Performance
+- project description
+- major features
+- differences from Assignment 3
+- folder structure
+- setup instructions
+- deployment notes
+- AI summary
+- documentation references
+- testing notes
+- rubric alignment
 
-The project uses practical performance improvements that fit a student assignment. These include loading JavaScript with `defer`, lazy loading non-critical images, simplifying DOM rendering, and keeping the project lightweight by using only vanilla HTML, CSS, and JavaScript.
+**Setup Instructions (10)**
 
-### Compatibility
+The README explains clearly how to run the project locally using:
 
-The layout is responsive and designed to work on desktop, tablet, and mobile screens. The project uses modern browser features that are supported in current versions of Chrome, Edge, and Firefox.
+- Git clone
+- local server such as Live Server
+- direct browser opening as a backup option
 
-### README Quality
+**Technical Details (10)**
 
-This README explains the project purpose, goals, features, setup steps, technology choices, API usage, AI support, and future improvements. It is written to be detailed enough for grading while still staying understandable for a beginner reader.
+Detailed technical explanation is provided in [docs/technical-documentation.md](docs/technical-documentation.md), including:
 
-### Setup Instructions
+- architecture and file structure
+- GitHub API integration
+- localStorage state management
+- validation logic
+- project filtering and sorting logic
+- performance and compatibility notes
+- testing summary
 
-The setup process is intentionally simple. The project can be opened directly in a browser or run using a local development server such as Live Server. No package installation, backend, or extra dependencies are required.
+**User Experience (10)**
 
-### Technical Details
+The project focuses on clear and user-friendly interaction:
 
-Detailed implementation information is available in `docs/technical-documentation.md`. That file explains the project structure, API flow, state management, validation logic, performance decisions, browser compatibility, and future improvements.
+- structured navigation
+- readable feedback messages
+- responsive design
+- polished visual layout
+- clear form guidance
+- personalization features
+- smooth but optional animation
 
-### User Experience
+### AI Integration
 
-The site focuses on clarity and usability. Visitors receive feedback messages, can personalize the site, can control which projects they want to see, and can use the theme toggle for a more comfortable viewing experience. The design remains simple, clean, and portfolio-appropriate.
+**Effective Use (5)**
 
-### Effective Use of AI
+AI tools were used as a review and refinement aid for:
 
-AI was used meaningfully to review the previous project, plan the upgrade, improve logic, support debugging, and strengthen documentation. The use of AI helped improve the final quality of the submission without replacing my own understanding of the work.
+- rubric review
+- planning the Assignment 4 improvements
+- reviewing code and documentation structure
+- refining wording and presentation choices
 
-### AI Documentation
+**Documentation (5)**
 
-AI usage is documented clearly in `docs/ai-usage-report.md`. The report explains which tools were used, what they were used for, what benefits and challenges appeared, and how the suggestions were reviewed and adapted.
+AI use is documented in [docs/ai-usage-report.md](docs/ai-usage-report.md).
 
-### AI Understanding
+**Understanding (5)**
 
-The final code and documentation were reviewed and modified so they match the project structure and assignment requirements. I kept the implementation simple enough that I can explain the features, logic, and decisions clearly if asked.
+The project was not submitted as raw AI output. All suggestions were reviewed, modified, and adapted to fit the actual project structure and assignment needs.
 
-### AI Innovation
+**Innovation (5)**
 
-AI was used not only for code suggestions but also for planning the upgrade path from Assignment 2 to Assignment 3. This helped turn an older portfolio into a stronger, more dynamic submission instead of replacing it with a completely unrelated project.
-
-## Project Structure
-
-```text
-202346910-MohammedAlabdullatif-assignment3/
-|-- README.md
-|-- index.html
-|-- css/
-|   |-- styles.css
-|-- js/
-|   |-- script.js
-|-- assets/
-|   |-- Me.jpg
-|   |-- phys.jpg
-|   |-- edad.jpg
-|   |-- CalcAward.jpg
-|-- docs/
-|   |-- ai-usage-report.md
-|   |-- technical-documentation.md
-|-- .gitignore
-```
-
-## Setup Instructions
-
-This project is intentionally simple to run.
-
-### Recommended: Use a Local Development Server
-
-This is the best option for grading because it avoids browser restrictions that can sometimes affect `fetch()` requests when a file is opened with the `file://` protocol.
-
-1. Clone or download the repository.
-2. Open the project in Visual Studio Code.
-3. Start a local server using an extension such as Live Server.
-4. Open the provided local URL in the browser.
-
-### Alternative: Open Directly
-
-1. Download or clone the repository.
-2. Open the project folder.
-3. Open `index.html` in a modern browser.
-
-If this method causes the GitHub API section to behave differently, use the local server option above.
-
-## Git Commands
-
-Clone the repository:
-
-```bash
-git clone https://github.com/MohAlabdullatif/202346910-MohammedAlabdullatif-assignment3.git
-```
-
-Move into the project folder:
-
-```bash
-cd 202346910-MohammedAlabdullatif-assignment3
-```
-
-## Technologies Used
-
-- HTML5 for structure and semantic content
-- CSS3 for layout, responsiveness, theming, and styling
-- Vanilla JavaScript for logic, interactivity, API integration, and validation
-- GitHub REST API for dynamic repository data
-- `localStorage` for saving user preferences
-
-## API Used
-
-The application uses the following GitHub endpoint:
-
-```text
-https://api.github.com/users/MohAlabdullatif/repos?sort=updated&per_page=6
-```
-
-### What Happens When the API Loads
-
-1. The page shows a loading message.
-2. JavaScript sends a request to the GitHub API.
-3. The response is checked.
-4. If successful, repository cards are created and displayed.
-5. If the request fails, a friendly error message is shown instead.
-
-This flow was added to show both successful data fetching and proper error handling.
-
-## User Experience Notes
-
-The website was designed to stay simple and clear:
-
-- the navigation is easy to follow
-- the layout adapts to smaller screens
-- status messages explain what is happening
-- the project section gives visitors control over what they want to view
-- the theme toggle allows a more comfortable viewing experience
+AI was used to support decision-making and documentation, while the final implementation was completed manually. The project also includes a creative interactive feature to help the final version stand out.
 
 ## Documentation Included
 
-This project includes two additional documentation files:
+- [docs/technical-documentation.md](docs/technical-documentation.md): explains architecture, features, logic, and implementation choices
+- [docs/ai-usage-report.md](docs/ai-usage-report.md): explains how AI tools were used responsibly
+- [presentation/README.md](presentation/README.md): placeholder notes for slides and demo video deliverables
 
-- `docs/technical-documentation.md`
-  - explains the structure, logic, API use, state management, and performance improvements
+## Testing Notes
 
-- `docs/ai-usage-report.md`
-  - explains which AI tools were used, what benefits they provided, what challenges appeared, and how I reviewed and modified the output responsibly
+The project was manually reviewed for:
 
-## AI Use Summary
-
-AI tools were used as support tools during development, not as a replacement for my own work.
-
-They helped with:
-
-- planning the upgrade from Assignment 2 to Assignment 3
-- reviewing missing rubric requirements
-- improving validation and logic structure
-- refining documentation
-
-All AI-generated suggestions were reviewed, edited, and adapted to match the project and my own understanding.
-
-## Browser Compatibility
-
-The project is designed to work in modern browsers such as:
-
-- Google Chrome
-- Microsoft Edge
-- Mozilla Firefox
-- Safari
-
-The layout is also responsive for mobile and tablet screen sizes. During review, the project was designed and checked with desktop and smaller-screen layouts in mind so the content remains readable across common devices.
-
-## Testing Performed
-
-The project was reviewed manually by checking:
-
-- theme toggle behavior and theme persistence after reload
-- visitor name save and clear behavior using `localStorage`
-- search, filter, and sort working together in the projects section
-- GitHub API loading, success state, and error-state handling
-- contact form validation for empty fields, invalid email, and short messages
-- responsive layout behavior on desktop and mobile-sized screens
-- animation fallback behavior when JavaScript features are limited
-
-## Possible Future Improvements
-
-If I continue improving this portfolio later, possible next steps include:
-
-- connecting the contact form to a real backend or email service
-- adding more projects with screenshots
-- improving accessibility even further
-- publishing the site online and adding a live link
-- adding project details pages in the future
+- responsive layout behavior
+- theme persistence after reload
+- saved visitor name behavior
+- contact draft persistence
+- contact form validation
+- project search, filtering, and sorting
+- GitHub API loading and fallback error messaging
+- keyboard focus visibility and reduced-motion behavior
 
 ## Author
 

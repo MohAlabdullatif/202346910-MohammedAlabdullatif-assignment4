@@ -8,3 +8,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Presentation exports
+presentation/*.tmp

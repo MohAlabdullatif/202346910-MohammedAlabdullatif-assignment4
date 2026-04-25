@@ -1,60 +1,130 @@
-const portfolioProjects = [
+const featuredProjects = [
     {
-        name: "Assignment 2 Interactive Portfolio",
-        description: "Upgraded the original portfolio with theme persistence, live search, and form feedback to improve interactivity.",
-        category: "javascript",
-        updated: "2026-04-10",
-        stack: ["HTML", "CSS", "JavaScript"]
+        name: "Assignment 4 Personal Web Application",
+        summary: "A polished portfolio that combines responsive design, local state, validation, live API data, and presentation-ready documentation.",
+        category: "web",
+        updated: "2026-04-25",
+        stack: ["HTML", "CSS", "JavaScript"],
+        result: "Portfolio application"
+    },
+    {
+        name: "Assignment 3 Advanced Portfolio Upgrade",
+        summary: "Extended a simple portfolio into a more dynamic application with filtering, GitHub integration, and localStorage persistence.",
+        category: "web",
+        updated: "2026-04-17",
+        stack: ["HTML", "CSS", "JavaScript", "API"],
+        result: "Front-end upgrade"
     },
     {
         name: "Text Sentiment Analysis",
-        description: "Built a machine learning workflow that cleaned Twitter data, created text vectors, and compared multiple classifiers.",
-        category: "other",
+        summary: "Compared machine learning classifiers on social media text after cleaning, vectorizing, and evaluating the dataset.",
+        category: "ai",
         updated: "2026-03-14",
-        stack: ["Python", "Machine Learning", "Data Analysis"]
+        stack: ["Python", "Scikit-learn", "NLP"],
+        result: "Classification workflow"
     },
     {
         name: "Flight Itinerary and Airfare Analysis",
-        description: "Analyzed a large airfare dataset to study pricing behavior, route characteristics, durations, and airline patterns.",
-        category: "other",
+        summary: "Studied airfare pricing and route behavior using dataset exploration, transformation, and visualization techniques.",
+        category: "data",
         updated: "2026-02-22",
-        stack: ["Python", "Pandas", "Visualization"]
+        stack: ["Python", "Pandas", "Visualization"],
+        result: "Data insights"
     },
     {
         name: "Responsive Personal Portfolio",
-        description: "Designed a responsive multi-section portfolio using semantic HTML and organized CSS for a clear personal brand.",
-        category: "html-css",
+        summary: "Created the original personal site with semantic structure, mobile-friendly layout, and clear personal branding.",
+        category: "web",
         updated: "2026-01-30",
-        stack: ["HTML", "CSS", "Responsive Design"]
+        stack: ["HTML", "CSS", "Responsive Design"],
+        result: "Foundational portfolio"
     }
 ];
 
+const plannerRecommendations = {
+    portfolio: {
+        fast: {
+            title: "Start with a clean one-page portfolio",
+            message: "Focus on strong sections, responsive layout, and one interactive feature so the result feels complete within one week."
+        },
+        steady: {
+            title: "Build a polished portfolio with live content",
+            message: "Use structured sections, project filtering, and one API integration to show both design and logic in a balanced timeline."
+        },
+        deep: {
+            title: "Create a scalable personal platform",
+            message: "Plan for multiple case studies, polished branding, deeper accessibility review, and future backend integration."
+        }
+    },
+    dashboard: {
+        fast: {
+            title: "Deliver a focused dashboard prototype",
+            message: "Choose one dataset, define two or three useful metrics, and present the information clearly without feature overload."
+        },
+        steady: {
+            title: "Build a dashboard with stronger interaction",
+            message: "Add filtering, summaries, and feedback states so the user can explore information instead of only viewing static charts."
+        },
+        deep: {
+            title: "Develop a data product roadmap",
+            message: "Include reusable components, multiple views, and more advanced validation or persistence for a richer application."
+        }
+    },
+    analysis: {
+        fast: {
+            title: "Create a lightweight analysis showcase",
+            message: "Keep the scope tight by presenting the question, method, and strongest insights with simple visuals and clean documentation."
+        },
+        steady: {
+            title: "Build an explainable analysis project",
+            message: "Combine dataset cleaning, summary findings, and a readable interface that communicates both results and reasoning clearly."
+        },
+        deep: {
+            title: "Develop an analysis portfolio case study",
+            message: "Use the extra time for comparison, interpretation, and presentation polish so the project tells a more complete technical story."
+        }
+    }
+};
+
+const storageKeys = {
+    theme: "portfolio-theme",
+    visitorName: "portfolio-visitor-name",
+    visitCount: "portfolio-visit-count",
+    contactDraft: "portfolio-contact-draft"
+};
+
 const state = {
-    theme: localStorage.getItem("theme") || "light",
-    visitorName: localStorage.getItem("visitorName") || "",
+    theme: localStorage.getItem(storageKeys.theme) || "light",
+    visitorName: localStorage.getItem(storageKeys.visitorName) || "",
     filter: "all",
     sort: "updated-desc",
-    search: ""
+    search: "",
+    visitCount: Number(localStorage.getItem(storageKeys.visitCount) || 0),
+    contactDraft: readContactDraft()
 };
 
 const elements = {
     body: document.body,
+    headerGreeting: document.getElementById("headerGreeting"),
     themeToggle: document.getElementById("themeToggle"),
-    greeting: document.getElementById("greeting"),
+    copyEmailButton: document.getElementById("copyEmailButton"),
+    visitCount: document.getElementById("visitCount"),
+    timeOnSite: document.getElementById("timeOnSite"),
     savedNameDisplay: document.getElementById("savedNameDisplay"),
     visitorForm: document.getElementById("visitorForm"),
     visitorName: document.getElementById("visitorName"),
     clearVisitorName: document.getElementById("clearVisitorName"),
     visitorMessage: document.getElementById("visitorMessage"),
-    timeOnSite: document.getElementById("timeOnSite"),
-    experienceLevel: document.getElementById("experienceLevel"),
-    experienceMessage: document.getElementById("experienceMessage"),
-    experienceResult: document.getElementById("experienceResult"),
+    plannerGoal: document.getElementById("plannerGoal"),
+    plannerTimeline: document.getElementById("plannerTimeline"),
+    plannerTitle: document.getElementById("plannerTitle"),
+    plannerMessage: document.getElementById("plannerMessage"),
     projectSearch: document.getElementById("projectSearch"),
     projectFilter: document.getElementById("projectFilter"),
     projectSort: document.getElementById("projectSort"),
-    projectsList: document.getElementById("projectsList"),
     projectFeedback: document.getElementById("projectFeedback"),
+    projectHighlights: document.getElementById("projectHighlights"),
+    projectsList: document.getElementById("projectsList"),
     githubStatus: document.getElementById("githubStatus"),
     githubRepoList: document.getElementById("githubRepoList"),
     contactForm: document.getElementById("contactForm"),
@@ -65,20 +135,29 @@ const elements = {
     emailError: document.getElementById("emailError"),
     messageError: document.getElementById("messageError"),
     formMessage: document.getElementById("formMessage"),
-    fadeSections: document.querySelectorAll(".fade-in-section")
+    clearDraftButton: document.getElementById("clearDraftButton"),
+    revealSections: document.querySelectorAll(".revealSection")
 };
+
+function readContactDraft() {
+    try {
+        return JSON.parse(localStorage.getItem(storageKeys.contactDraft)) || {
+            fullName: "",
+            email: "",
+            message: ""
+        };
+    } catch (error) {
+        return {
+            fullName: "",
+            email: "",
+            message: ""
+        };
+    }
+}
 
 function setStatusMessage(element, message, type) {
     element.textContent = message;
     element.className = `statusMessage ${type}`;
-}
-
-function formatDate(dateValue) {
-    return new Intl.DateTimeFormat("en", {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-    }).format(new Date(dateValue));
 }
 
 function escapeHtml(value) {
@@ -90,11 +169,19 @@ function escapeHtml(value) {
         .replaceAll("'", "&#39;");
 }
 
+function formatDate(dateValue) {
+    return new Intl.DateTimeFormat("en", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+    }).format(new Date(dateValue));
+}
+
 function formatCategory(category) {
     const labels = {
-        javascript: "JavaScript",
-        "html-css": "HTML-CSS",
-        other: "Other"
+        web: "Web",
+        data: "Data",
+        ai: "AI"
     };
 
     return labels[category] || category;
@@ -108,57 +195,58 @@ function applyTheme() {
 
 function updateGreeting() {
     const currentHour = new Date().getHours();
-    let greetingText = "Good Evening!";
+    let greetingText = "Building with purpose";
 
     if (currentHour < 12) {
-        greetingText = "Good Morning!";
+        greetingText = "Good morning";
     } else if (currentHour < 18) {
-        greetingText = "Good Afternoon!";
+        greetingText = "Good afternoon";
+    } else {
+        greetingText = "Good evening";
     }
 
-    const namePart = state.visitorName ? `, ${state.visitorName}` : "";
-    elements.greeting.textContent = `${greetingText}${namePart}`;
+    const nameSuffix = state.visitorName ? `, ${state.visitorName}` : "";
+    elements.headerGreeting.textContent = `${greetingText}${nameSuffix}`;
+}
+
+function updateVisitCount() {
+    state.visitCount += 1;
+    localStorage.setItem(storageKeys.visitCount, String(state.visitCount));
+    elements.visitCount.textContent = String(state.visitCount);
 }
 
 function updateSavedNameDisplay() {
-    elements.savedNameDisplay.textContent = state.visitorName || "No saved name yet";
+    elements.savedNameDisplay.textContent = state.visitorName || "No name saved";
     elements.visitorName.value = state.visitorName;
 }
 
-function updateExperienceContent(level) {
-    const messages = {
-        beginner: {
-            summary: "Start with the responsive portfolio project",
-            detail: "A beginner visitor should start with the HTML/CSS portfolio because it is easier to follow and explains layout decisions clearly."
-        },
-        intermediate: {
-            summary: "Explore the Assignment 2 interactive portfolio",
-            detail: "An intermediate visitor should review the JavaScript portfolio upgrade because it combines user interaction, validation, and localStorage."
-        },
-        advanced: {
-            summary: "Check the data and machine learning projects",
-            detail: "An advanced visitor may be more interested in the analysis and machine learning projects because they involve larger datasets and more technical workflows."
-        }
-    };
+function updatePlannerRecommendation() {
+    const goal = elements.plannerGoal.value;
+    const timeline = elements.plannerTimeline.value;
 
-    const selectedMessage = messages[level];
-
-    if (!selectedMessage) {
-        elements.experienceResult.textContent = "Select your level below";
-        setStatusMessage(elements.experienceMessage, "Select a level to see which projects fit you best.", "infoMessage");
+    if (!goal || !timeline) {
+        elements.plannerTitle.textContent = "Select options to generate a plan";
+        elements.plannerMessage.textContent = "I will suggest the best starting approach based on the project type and available time.";
         return;
     }
 
-    elements.experienceResult.textContent = selectedMessage.summary;
-    setStatusMessage(elements.experienceMessage, selectedMessage.detail, "successMessage");
+    const recommendation = plannerRecommendations[goal]?.[timeline];
+
+    if (!recommendation) {
+        elements.plannerTitle.textContent = "Planner data unavailable";
+        elements.plannerMessage.textContent = "Try a different combination to generate a recommendation.";
+        return;
+    }
+
+    elements.plannerTitle.textContent = recommendation.title;
+    elements.plannerMessage.textContent = recommendation.message;
 }
 
 function getVisibleProjects() {
-    return portfolioProjects
+    return featuredProjects
         .filter((project) => {
-            const matchesSearch = `${project.name} ${project.description} ${project.stack.join(" ")}`
-                .toLowerCase()
-                .includes(state.search.toLowerCase());
+            const haystack = `${project.name} ${project.summary} ${project.stack.join(" ")} ${project.result}`.toLowerCase();
+            const matchesSearch = haystack.includes(state.search.toLowerCase());
             const matchesFilter = state.filter === "all" || project.category === state.filter;
             return matchesSearch && matchesFilter;
         })
@@ -170,12 +258,29 @@ function getVisibleProjects() {
             const firstDate = new Date(first.updated);
             const secondDate = new Date(second.updated);
 
-            if (state.sort === "updated-asc") {
-                return firstDate - secondDate;
-            }
-
-            return secondDate - firstDate;
+            return state.sort === "updated-asc" ? firstDate - secondDate : secondDate - firstDate;
         });
+}
+
+function renderProjectHighlights() {
+    const categoryCounts = featuredProjects.reduce((counts, project) => {
+        counts[project.category] = (counts[project.category] || 0) + 1;
+        return counts;
+    }, {});
+
+    const highlights = [
+        { label: "Featured Projects", value: String(featuredProjects.length) },
+        { label: "Web Projects", value: String(categoryCounts.web || 0) },
+        { label: "Data and AI Projects", value: String((categoryCounts.data || 0) + (categoryCounts.ai || 0)) },
+        { label: "Latest Update", value: formatDate(featuredProjects[0].updated) }
+    ];
+
+    elements.projectHighlights.innerHTML = highlights.map((highlight) => `
+        <article class="miniStat">
+            <span class="miniLabel">${escapeHtml(highlight.label)}</span>
+            <strong>${escapeHtml(highlight.value)}</strong>
+        </article>
+    `).join("");
 }
 
 function renderProjects() {
@@ -183,33 +288,28 @@ function renderProjects() {
 
     if (!visibleProjects.length) {
         elements.projectsList.innerHTML = "";
-        setStatusMessage(elements.projectFeedback, "No featured projects match the current search and filter settings.", "errorMessage");
+        setStatusMessage(elements.projectFeedback, "No projects match the current search and filter settings.", "errorMessage");
         return;
     }
 
-    const projectCardsMarkup = visibleProjects.map((project) => `
-        <article class="card">
+    elements.projectsList.innerHTML = visibleProjects.map((project) => `
+        <article class="surfaceCard">
+            <p class="sectionTag">${escapeHtml(formatCategory(project.category))}</p>
             <h3>${escapeHtml(project.name)}</h3>
-            <p>${escapeHtml(project.description)}</p>
-            <div class="projectMeta">
-                <span class="metaPill">${formatCategory(project.category)}</span>
+            <p>${escapeHtml(project.summary)}</p>
+            <div class="metaRow">
                 <span class="metaPill">Updated ${formatDate(project.updated)}</span>
+                <span class="metaPill">${escapeHtml(project.result)}</span>
             </div>
             <p><strong>Stack:</strong> ${escapeHtml(project.stack.join(", "))}</p>
         </article>
     `).join("");
 
-    elements.projectsList.innerHTML = projectCardsMarkup;
+    const message = state.search || state.filter !== "all"
+        ? `Showing ${visibleProjects.length} matching project(s).`
+        : "Showing all featured projects.";
 
-    if (state.search || state.filter !== "all") {
-        setStatusMessage(
-            elements.projectFeedback,
-            `Showing ${visibleProjects.length} project(s) after applying the current search, filter, and sort settings.`,
-            "successMessage"
-        );
-    } else {
-        setStatusMessage(elements.projectFeedback, "Showing all featured projects.", "infoMessage");
-    }
+    setStatusMessage(elements.projectFeedback, message, state.search || state.filter !== "all" ? "successMessage" : "infoMessage");
 }
 
 async function loadGitHubRepositories() {
@@ -228,34 +328,32 @@ async function loadGitHubRepositories() {
 
         const repositories = await response.json();
 
-        if (!Array.isArray(repositories) || repositories.length === 0) {
+        if (!Array.isArray(repositories) || !repositories.length) {
             elements.githubRepoList.innerHTML = "";
-            setStatusMessage(elements.githubStatus, "No public repositories were found for this GitHub account.", "errorMessage");
+            setStatusMessage(elements.githubStatus, "No public repositories were found for this profile.", "errorMessage");
             return;
         }
 
-        const repoMarkup = repositories.map((repo) => `
-            <article class="card">
+        elements.githubRepoList.innerHTML = repositories.map((repo) => `
+            <article class="surfaceCard">
+                <p class="sectionTag">Repository</p>
                 <h3>${escapeHtml(repo.name)}</h3>
                 <p>${escapeHtml(repo.description || "No description was provided for this repository.")}</p>
-                <div class="repoMeta">
+                <div class="metaRow">
                     <span class="metaPill">${escapeHtml(repo.language || "Not specified")}</span>
                     <span class="metaPill">Updated ${formatDate(repo.updated_at)}</span>
                     <span class="metaPill">${escapeHtml(repo.visibility)}</span>
                 </div>
-                <div class="repoActions">
-                    <a class="repoLink" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noreferrer">View Repository</a>
-                </div>
+                <a class="repoLink" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noreferrer">View Repository</a>
             </article>
         `).join("");
 
-        elements.githubRepoList.innerHTML = repoMarkup;
         setStatusMessage(elements.githubStatus, "Repositories loaded successfully from the GitHub API.", "successMessage");
     } catch (error) {
         elements.githubRepoList.innerHTML = "";
         setStatusMessage(
             elements.githubStatus,
-            "GitHub repositories could not be loaded right now. Please try again later or visit the GitHub profile directly.",
+            "GitHub repositories could not be loaded right now. Please try again later or open the GitHub profile directly.",
             "errorMessage"
         );
         console.error("GitHub API error:", error);
@@ -265,9 +363,9 @@ async function loadGitHubRepositories() {
 function startTimeOnSiteCounter() {
     const startTime = Date.now();
 
-    setInterval(() => {
-        const elapsedMilliseconds = Date.now() - startTime;
-        const totalSeconds = Math.floor(elapsedMilliseconds / 1000);
+    window.setInterval(() => {
+        const elapsedMs = Date.now() - startTime;
+        const totalSeconds = Math.floor(elapsedMs / 1000);
         const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
         const seconds = String(totalSeconds % 60).padStart(2, "0");
         elements.timeOnSite.textContent = `${minutes}:${seconds}`;
@@ -287,7 +385,7 @@ function validateContactForm() {
     elements.messageError.textContent = "";
 
     if (!name) {
-        elements.nameError.textContent = "Name is required.";
+        elements.nameError.textContent = "Full name is required.";
         isValid = false;
     }
 
@@ -302,27 +400,56 @@ function validateContactForm() {
     if (!message) {
         elements.messageError.textContent = "Message is required.";
         isValid = false;
-    } else if (message.length < 20) {
-        elements.messageError.textContent = "Message must be at least 20 characters long.";
+    } else if (message.length < 25) {
+        elements.messageError.textContent = "Message must be at least 25 characters long.";
         isValid = false;
     }
 
     if (!isValid) {
-        setStatusMessage(elements.formMessage, "Please correct the form errors before submitting.", "errorMessage");
+        setStatusMessage(elements.formMessage, "Please correct the highlighted form fields before submitting.", "errorMessage");
         return false;
     }
 
     setStatusMessage(
         elements.formMessage,
-        `Thank you, ${name}. Your message passed validation and is ready to be sent.`,
+        `Thanks, ${name}. Your message passed validation and the saved draft was cleared.`,
         "successMessage"
     );
+
+    localStorage.removeItem(storageKeys.contactDraft);
+    state.contactDraft = { fullName: "", email: "", message: "" };
     return true;
 }
 
-function setupScrollAnimations() {
+function saveContactDraft() {
+    state.contactDraft = {
+        fullName: elements.fullName.value,
+        email: elements.email.value,
+        message: elements.message.value
+    };
+
+    localStorage.setItem(storageKeys.contactDraft, JSON.stringify(state.contactDraft));
+}
+
+function loadContactDraft() {
+    elements.fullName.value = state.contactDraft.fullName || "";
+    elements.email.value = state.contactDraft.email || "";
+    elements.message.value = state.contactDraft.message || "";
+}
+
+function clearContactDraft() {
+    elements.contactForm.reset();
+    elements.nameError.textContent = "";
+    elements.emailError.textContent = "";
+    elements.messageError.textContent = "";
+    localStorage.removeItem(storageKeys.contactDraft);
+    state.contactDraft = { fullName: "", email: "", message: "" };
+    setStatusMessage(elements.formMessage, "Saved contact draft cleared.", "infoMessage");
+}
+
+function setupScrollReveal() {
     if (!("IntersectionObserver" in window)) {
-        elements.fadeSections.forEach((section) => section.classList.add("visible"));
+        elements.revealSections.forEach((section) => section.classList.add("visible"));
         return;
     }
 
@@ -333,46 +460,57 @@ function setupScrollAnimations() {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.12 });
 
-    elements.fadeSections.forEach((section) => observer.observe(section));
+    elements.revealSections.forEach((section) => observer.observe(section));
+}
+
+async function copyEmailAddress() {
+    const email = "Mohamadalabdullatif2005@gmail.com";
+
+    try {
+        await navigator.clipboard.writeText(email);
+        setStatusMessage(elements.visitorMessage, "Email address copied to clipboard.", "successMessage");
+    } catch (error) {
+        setStatusMessage(elements.visitorMessage, "Copy failed on this browser. Email: Mohamadalabdullatif2005@gmail.com", "infoMessage");
+    }
 }
 
 function attachEventListeners() {
     elements.themeToggle.addEventListener("click", () => {
         state.theme = state.theme === "dark" ? "light" : "dark";
-        localStorage.setItem("theme", state.theme);
+        localStorage.setItem(storageKeys.theme, state.theme);
         applyTheme();
     });
 
+    elements.copyEmailButton.addEventListener("click", copyEmailAddress);
+
     elements.visitorForm.addEventListener("submit", (event) => {
         event.preventDefault();
+        const name = elements.visitorName.value.trim();
 
-        const newName = elements.visitorName.value.trim();
-
-        if (!newName) {
-            setStatusMessage(elements.visitorMessage, "Please enter a name before saving.", "errorMessage");
+        if (!name) {
+            setStatusMessage(elements.visitorMessage, "Please enter a visitor name before saving.", "errorMessage");
             return;
         }
 
-        state.visitorName = newName;
-        localStorage.setItem("visitorName", state.visitorName);
-        updateSavedNameDisplay();
+        state.visitorName = name;
+        localStorage.setItem(storageKeys.visitorName, state.visitorName);
         updateGreeting();
-        setStatusMessage(elements.visitorMessage, `Welcome, ${state.visitorName}. Your preference was saved locally.`, "successMessage");
+        updateSavedNameDisplay();
+        setStatusMessage(elements.visitorMessage, `Welcome, ${state.visitorName}. Your name was saved locally.`, "successMessage");
     });
 
     elements.clearVisitorName.addEventListener("click", () => {
         state.visitorName = "";
-        localStorage.removeItem("visitorName");
-        updateSavedNameDisplay();
+        localStorage.removeItem(storageKeys.visitorName);
         updateGreeting();
-        setStatusMessage(elements.visitorMessage, "Saved visitor name cleared from localStorage.", "infoMessage");
+        updateSavedNameDisplay();
+        setStatusMessage(elements.visitorMessage, "Saved visitor name removed from local storage.", "infoMessage");
     });
 
-    elements.experienceLevel.addEventListener("change", (event) => {
-        updateExperienceContent(event.target.value);
-    });
+    elements.plannerGoal.addEventListener("change", updatePlannerRecommendation);
+    elements.plannerTimeline.addEventListener("change", updatePlannerRecommendation);
 
     elements.projectSearch.addEventListener("input", (event) => {
         state.search = event.target.value.trim();
@@ -389,6 +527,13 @@ function attachEventListeners() {
         renderProjects();
     });
 
+    // Save contact progress continuously so the form survives accidental refreshes.
+    [elements.fullName, elements.email, elements.message].forEach((field) => {
+        field.addEventListener("input", saveContactDraft);
+    });
+
+    elements.clearDraftButton.addEventListener("click", clearContactDraft);
+
     elements.contactForm.addEventListener("submit", (event) => {
         event.preventDefault();
 
@@ -401,11 +546,14 @@ function attachEventListeners() {
 function initializePage() {
     applyTheme();
     updateGreeting();
+    updateVisitCount();
     updateSavedNameDisplay();
-    updateExperienceContent("");
+    updatePlannerRecommendation();
+    renderProjectHighlights();
     renderProjects();
+    loadContactDraft();
     startTimeOnSiteCounter();
-    setupScrollAnimations();
+    setupScrollReveal();
     attachEventListeners();
     loadGitHubRepositories();
 }

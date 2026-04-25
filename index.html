@@ -5,136 +5,185 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
         name="description"
-        content="Advanced portfolio web application with GitHub API integration, filtering, sorting, localStorage state management, and form validation."
+        content="Personal portfolio web application for Mohammed Alabdullatif featuring live GitHub data, interactive project discovery, and a polished responsive experience."
     >
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="css/styles.css">
-    <title>Mohammed Alabdullatif | Advanced Portfolio</title>
+    <title>Mohammed Alabdullatif | Personal Web Application</title>
 </head>
 <body>
-    <header class="headerBar">
-        <div class="brandBlock">
-            <p class="siteTitle">Moe Portfolio</p>
-            <p id="greeting" class="greetingText"></p>
-        </div>
+    <header class="siteHeader">
+        <a class="brandMark" href="#top" aria-label="Go to top">
+            <span class="brandDot"></span>
+            <span>
+                <strong>Moe Portfolio</strong>
+                <small id="headerGreeting">Building with purpose</small>
+            </span>
+        </a>
 
         <nav class="mainNav" aria-label="Primary navigation">
-            <a href="#aboutMe" class="headerItems">About</a>
-            <a href="#projects" class="headerItems">Projects</a>
-            <a href="#github" class="headerItems">GitHub</a>
-            <a href="#achievements" class="headerItems">Achievements</a>
-            <a href="#contact" class="headerItems">Contact</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#github">GitHub</a>
+            <a href="#journey">Journey</a>
+            <a href="#planner">Planner</a>
+            <a href="#contact">Contact</a>
         </nav>
 
-        <button id="themeToggle" type="button" aria-label="Toggle light and dark mode">Dark Mode</button>
+        <div class="headerActions">
+            <button id="themeToggle" type="button" class="secondaryButton">Dark Mode</button>
+            <a class="primaryButton" href="#contact">Let's Connect</a>
+        </div>
     </header>
 
-    <main>
-        <section id="aboutMe" class="fade-in-section heroSection">
-            <div class="aboutMeCard">
-                <img
-                    src="assets/Me.jpg"
-                    alt="Portrait of Mohammed Alabdullatif"
-                    loading="eager"
-                    width="162"
-                    height="162"
-                >
-
-                <div class="heroContent">
-                    <p class="eyebrow">Software Engineering Student</p>
-                    <h1>Building practical web and data-driven solutions.</h1>
-                    <p>
-                        I am Mohammed Alabdullatif, a software engineering student with interests in Python,
-                        artificial intelligence, data analysis, and front-end development. This portfolio was
-                        upgraded for Assignment 3 to show stronger JavaScript logic, API integration, state
-                        management, and performance improvements while keeping the code simple and readable.
+    <main id="top">
+        <section id="about" class="heroSection revealSection">
+            <div class="heroPanel surfaceCard">
+                <div class="heroCopy">
+                    <p class="sectionTag">Final Portfolio Project</p>
+                    <h1>Software engineering student building clean, useful, and data-aware web experiences.</h1>
+                    <p class="heroLead">
+                        I am Mohammed Alabdullatif. This final portfolio brings together my coursework,
+                        front-end skills, AI-assisted workflow, and personal achievements into one polished
+                        application that is ready to present and continue growing after the course.
                     </p>
 
-                    <div class="heroStats">
-                        <div class="miniCard">
-                            <span class="miniLabel">Visitor Preference</span>
-                            <strong id="savedNameDisplay">No saved name yet</strong>
-                        </div>
-                        <div class="miniCard">
+                    <div class="heroActions">
+                        <a class="primaryButton" href="#projects">Explore My Work</a>
+                        <button id="copyEmailButton" type="button" class="secondaryButton">Copy Email</button>
+                    </div>
+
+                    <div class="statsGrid">
+                        <article class="miniStat">
+                            <span class="miniLabel">Visit Count</span>
+                            <strong id="visitCount">0</strong>
+                        </article>
+                        <article class="miniStat">
                             <span class="miniLabel">Time On Site</span>
                             <strong id="timeOnSite">00:00</strong>
-                        </div>
-                        <div class="miniCard">
-                            <span class="miniLabel">Recommended Track</span>
-                            <strong id="experienceResult">Select your level below</strong>
-                        </div>
+                        </article>
+                        <article class="miniStat">
+                            <span class="miniLabel">Saved Visitor</span>
+                            <strong id="savedNameDisplay">No name saved</strong>
+                        </article>
+                        <article class="miniStat">
+                            <span class="miniLabel">Current Focus</span>
+                            <strong>AI, Web, Data</strong>
+                        </article>
                     </div>
                 </div>
-            </div>
 
-            <div class="sectionContent utilityGrid">
-                <div class="card preferenceCard">
-                    <h2>Personalize Your Visit</h2>
-                    <p>Save a name locally so the site remembers your preference after reloading.</p>
+                <div class="heroVisual">
+                    <img
+                        src="assets/images/Me.jpg"
+                        alt="Portrait of Mohammed Alabdullatif"
+                        loading="eager"
+                        width="162"
+                        height="162"
+                    >
 
-                    <form id="visitorForm" class="stackForm" novalidate>
-                        <label for="visitorName">Visitor Name</label>
-                        <input type="text" id="visitorName" name="visitorName" placeholder="Enter a name">
-                        <div class="buttonRow">
-                            <button type="submit" class="submitBtn">Save Name</button>
-                            <button type="button" id="clearVisitorName" class="secondaryBtn">Clear</button>
-                        </div>
-                        <p id="visitorMessage" class="statusMessage infoMessage" aria-live="polite">
-                            Your name preference is stored only in this browser.
-                        </p>
-                    </form>
-                </div>
-
-                <div class="card preferenceCard">
-                    <h2>Choose Your Experience Level</h2>
-                    <p>This extra logic updates the message based on your selection.</p>
-
-                    <label for="experienceLevel">Experience Level</label>
-                    <select id="experienceLevel" name="experienceLevel">
-                        <option value="">Choose one</option>
-                        <option value="beginner">Beginner</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="advanced">Advanced</option>
-                    </select>
-
-                    <p id="experienceMessage" class="statusMessage infoMessage">
-                        Select a level to see which projects fit you best.
-                    </p>
+                    <div class="surfaceInset">
+                        <p class="sectionTag">What This Site Demonstrates</p>
+                        <ul class="featureList">
+                            <li>Responsive single-page application structure</li>
+                            <li>Interactive filtering, sorting, and local state</li>
+                            <li>Live GitHub API integration with error handling</li>
+                            <li>Professional documentation and AI usage reporting</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="fade-in-section">
-            <h2>Featured Projects</h2>
-            <p class="sectionIntro">
-                This section demonstrates advanced logic using search, category filtering, and sorting together.
-            </p>
+        <section class="revealSection">
+            <div class="splitLayout">
+                <article class="surfaceCard">
+                    <p class="sectionTag">Visitor Personalization</p>
+                    <h2>Make the page feel personal</h2>
+                    <p>Save your name in this browser to personalize the greeting and show local state management clearly.</p>
 
-            <div class="projectsToolbar card">
+                    <form id="visitorForm" class="stackForm" novalidate>
+                        <label for="visitorName">Visitor Name</label>
+                        <input id="visitorName" name="visitorName" type="text" placeholder="Enter your name">
+                        <div class="buttonRow">
+                            <button type="submit" class="primaryButton">Save Name</button>
+                            <button type="button" id="clearVisitorName" class="secondaryButton">Clear</button>
+                        </div>
+                        <p id="visitorMessage" class="statusMessage infoMessage" aria-live="polite">
+                            Your preference stays on this device only.
+                        </p>
+                    </form>
+                </article>
+
+                <article id="planner" class="surfaceCard accentCard">
+                    <p class="sectionTag">Creative Feature</p>
+                    <h2>Project Collaboration Planner</h2>
+                    <p>
+                        This section turns simple input into a tailored action plan. It adds a more application-like
+                        experience beyond a standard portfolio.
+                    </p>
+
+                    <div class="plannerGrid">
+                        <div>
+                            <label for="plannerGoal">Project Goal</label>
+                            <select id="plannerGoal" name="plannerGoal">
+                                <option value="">Choose a goal</option>
+                                <option value="portfolio">Build a portfolio</option>
+                                <option value="dashboard">Create a dashboard</option>
+                                <option value="analysis">Analyze data</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="plannerTimeline">Timeline</label>
+                            <select id="plannerTimeline" name="plannerTimeline">
+                                <option value="">Choose a timeline</option>
+                                <option value="fast">1 week</option>
+                                <option value="steady">2-4 weeks</option>
+                                <option value="deep">1+ month</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="surfaceInset">
+                        <span class="miniLabel">Recommended Plan</span>
+                        <strong id="plannerTitle">Select options to generate a plan</strong>
+                        <p id="plannerMessage" class="plannerMessage">
+                            I will suggest the best starting approach based on the project type and available time.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="projects" class="revealSection">
+            <div class="sectionHeading">
+                <p class="sectionTag">Selected Work</p>
+                <h2>Projects I can present confidently</h2>
+                <p>
+                    These projects combine front-end work, problem solving, data skills, and academic growth.
+                    You can search, filter, and sort them live.
+                </p>
+            </div>
+
+            <div class="surfaceCard toolbarCard">
                 <div class="toolbarGrid">
                     <div>
-                        <label for="projectSearch" class="searchLabel">Search Projects</label>
-                        <input
-                            type="text"
-                            id="projectSearch"
-                            placeholder="Type to search projects..."
-                            aria-label="Search projects"
-                        >
+                        <label for="projectSearch">Search</label>
+                        <input id="projectSearch" type="text" placeholder="Search by name, summary, or tech">
                     </div>
-
                     <div>
-                        <label for="projectFilter" class="searchLabel">Filter By Category</label>
-                        <select id="projectFilter" aria-label="Filter projects by category">
+                        <label for="projectFilter">Category</label>
+                        <select id="projectFilter">
                             <option value="all">All</option>
-                            <option value="javascript">JavaScript</option>
-                            <option value="html-css">HTML-CSS</option>
-                            <option value="other">Other</option>
+                            <option value="web">Web</option>
+                            <option value="data">Data</option>
+                            <option value="ai">AI</option>
                         </select>
                     </div>
-
                     <div>
-                        <label for="projectSort" class="searchLabel">Sort By</label>
-                        <select id="projectSort" aria-label="Sort projects">
+                        <label for="projectSort">Sort By</label>
+                        <select id="projectSort">
                             <option value="updated-desc">Recently Updated</option>
                             <option value="updated-asc">Oldest Updated</option>
                             <option value="name-asc">Name A-Z</option>
@@ -147,113 +196,135 @@
                 Showing all featured projects.
             </p>
 
-            <div class="sectionContent" id="projectsList"></div>
+            <div id="projectHighlights" class="highlightsGrid"></div>
+            <div id="projectsList" class="cardGrid"></div>
         </section>
 
-        <section id="github" class="fade-in-section">
-            <h2>Live GitHub Repositories</h2>
-            <p class="sectionIntro">
-                This area loads public repositories dynamically from the GitHub API for the user
-                <strong>MohAlabdullatif</strong>.
-            </p>
+        <section id="github" class="revealSection">
+            <div class="sectionHeading">
+                <p class="sectionTag">Live Data</p>
+                <h2>GitHub activity snapshot</h2>
+                <p>
+                    This section fetches repository data from the GitHub API in real time and shows the most
+                    recently updated public repositories.
+                </p>
+            </div>
 
             <p id="githubStatus" class="statusMessage infoMessage" aria-live="polite">
                 Loading repositories from GitHub...
             </p>
-
-            <div class="sectionContent" id="githubRepoList"></div>
+            <div id="githubRepoList" class="cardGrid"></div>
         </section>
 
-        <section id="achievements" class="fade-in-section">
-            <h2>Achievements</h2>
-            <div class="sectionContent">
-                <article class="card">
+        <section id="journey" class="revealSection">
+            <div class="sectionHeading">
+                <p class="sectionTag">Journey</p>
+                <h2>Academic milestones and growth moments</h2>
+                <p>
+                    These moments reflect both academic consistency and the confidence to keep building on top of each result.
+                </p>
+            </div>
+
+            <div class="timelineGrid">
+                <article class="surfaceCard timelineCard">
                     <img
-                        src="assets/phys.jpg"
+                        src="assets/images/phys.jpg"
                         alt="Physics ceremony recognition"
                         loading="lazy"
                         width="842"
                         height="842"
                     >
-                    <p>
-                        Recognized twice as an A+ student at the physics ceremony, demonstrating strong
-                        academic consistency and discipline.
-                    </p>
+                    <h3>Physics Excellence Recognition</h3>
+                    <p>Recognized twice as an A+ student at the physics ceremony, showing consistency and discipline.</p>
                 </article>
-                <article class="card">
+
+                <article class="surfaceCard timelineCard">
                     <img
-                        src="assets/edad.jpg"
+                        src="assets/images/edad.jpg"
                         alt="Edad program certificate"
                         loading="lazy"
                         width="1312"
                         height="1312"
                     >
-                    <p>
-                        Completed the Edad program by McKinsey &amp; Company, which strengthened my data
-                        analysis, problem-solving, and professional communication skills.
-                    </p>
+                    <h3>Edad Program Completion</h3>
+                    <p>Completed the McKinsey Edad program and strengthened data analysis, problem solving, and communication.</p>
                 </article>
-                <article class="card">
+
+                <article class="surfaceCard timelineCard">
                     <img
-                        src="assets/CalcAward.jpg"
+                        src="assets/images/CalcAward.jpg"
                         alt="Calculus award recognition"
                         loading="lazy"
                         width="889"
                         height="889"
                     >
-                    <p>
-                        Received a Calculus Award as one of the top ten students in the course with a perfect
-                        score of 100%.
-                    </p>
+                    <h3>Calculus Award</h3>
+                    <p>Finished among the top students in calculus with a perfect course score of 100%.</p>
                 </article>
             </div>
         </section>
 
-        <section id="contact" class="fade-in-section">
-            <h2>Contact Me</h2>
-
-            <div class="sectionContent contactInfo">
-                <div class="card"><strong>Email:</strong> Mohamadalabdullatif2005@gmail.com</div>
-                <div class="card"><strong>Phone:</strong> +966 568454698</div>
-                <div class="card"><strong>Focus:</strong> Software engineering, AI, and data analysis</div>
+        <section id="contact" class="revealSection">
+            <div class="sectionHeading">
+                <p class="sectionTag">Contact</p>
+                <h2>Start a conversation</h2>
+                <p>
+                    The form below validates user input on the client side and saves a draft locally so progress is not lost by accident.
+                </p>
             </div>
 
-            <form id="contactForm" class="contactForm" novalidate>
-                <h3>Send a Message</h3>
+            <div class="splitLayout contactLayout">
+                <article class="surfaceCard">
+                    <h3>Contact Details</h3>
+                    <div class="contactList">
+                        <p><strong>Email:</strong> <a href="mailto:Mohamadalabdullatif2005@gmail.com">Mohamadalabdullatif2005@gmail.com</a></p>
+                        <p><strong>Phone:</strong> <a href="tel:+966568454698">+966 568454698</a></p>
+                        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/mohammed-alabdullatif-725a52281" target="_blank" rel="noreferrer">linkedin.com/in/mohammed-alabdullatif-725a52281</a></p>
+                        <p><strong>GitHub:</strong> <a href="https://github.com/MohAlabdullatif" target="_blank" rel="noreferrer">github.com/MohAlabdullatif</a></p>
+                    </div>
+                </article>
 
-                <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" name="fullName" placeholder="Enter your name">
-                <p id="nameError" class="fieldError" aria-live="polite"></p>
+                <form id="contactForm" class="surfaceCard stackForm" novalidate>
+                    <h3>Send a Message</h3>
 
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email">
-                <p id="emailError" class="fieldError" aria-live="polite"></p>
+                    <label for="fullName">Full Name</label>
+                    <input id="fullName" name="fullName" type="text" placeholder="Enter your full name">
+                    <p id="nameError" class="fieldError" aria-live="polite"></p>
 
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="5" placeholder="Write your message"></textarea>
-                <p id="messageError" class="fieldError" aria-live="polite"></p>
+                    <label for="email">Email Address</label>
+                    <input id="email" name="email" type="email" placeholder="Enter your email address">
+                    <p id="emailError" class="fieldError" aria-live="polite"></p>
 
-                <button type="submit" class="submitBtn">Send Message</button>
-                <p id="formMessage" class="statusMessage infoMessage" aria-live="polite">
-                    The form is validated on the client side before submission.
-                </p>
-            </form>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Tell me about your idea or question"></textarea>
+                    <p id="messageError" class="fieldError" aria-live="polite"></p>
+
+                    <div class="buttonRow">
+                        <button type="submit" class="primaryButton">Validate Message</button>
+                        <button id="clearDraftButton" type="button" class="secondaryButton">Clear Draft</button>
+                    </div>
+
+                    <p id="formMessage" class="statusMessage infoMessage" aria-live="polite">
+                        Draft content is saved automatically in this browser while you type.
+                    </p>
+                </form>
+            </div>
         </section>
     </main>
 
-    <footer class="footerBar">
-        <a href="#aboutMe">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#github">GitHub</a>
-        <a href="#contact">Contact</a>
-        <a href="https://www.linkedin.com/in/mohammed-alabdullatif-725a52281" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com/MohAlabdullatif" target="_blank" rel="noreferrer">GitHub Profile</a>
+    <footer class="siteFooter">
+        <p>Built by Mohammed Alabdullatif for SWE363 Assignment 4.</p>
+        <div class="footerLinks">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#github">GitHub</a>
+            <a href="#contact">Contact</a>
+        </div>
     </footer>
 
     <noscript>
         <p class="statusMessage errorMessage">
-            This portfolio uses JavaScript for filtering, GitHub API loading, saved preferences, and form validation.
-            Please enable JavaScript to view the full experience.
+            JavaScript is required for project filtering, saved preferences, GitHub loading, and form validation.
         </p>
     </noscript>
 
